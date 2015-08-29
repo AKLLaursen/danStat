@@ -15,6 +15,6 @@ Description: danStat provides a graphical user interface (GUI) to the various
 Imports: magrittr,
     httr,
     rjstat
-License: file LICENCE
+License: MIT + file LICENCE
 LazyData: TRUE
 ByteCompile: Yes
