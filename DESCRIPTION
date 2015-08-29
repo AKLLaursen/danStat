@@ -1,0 +1,20 @@
+Package: danStat
+Type: Package
+Title: A package providing a graphical user interface to the data from Danmarks
+    Statistik.
+Version: 0.1
+Date: 2015-08-26
+Author: Andreas Keller Leth Laursen <andreas.keller@gmail.com>
+Maintainer: Andreas Keller Leth Laursen <andreas.keller@gmail.com>
+Description: danStat provides a graphical user interface (GUI) to the various
+   statistical series from Danmarks Statistik. Specifically danStat provides
+   functions to call the API provided by Danmarks Statistik, serving as a
+   wrapper around various functions from `httr` and `rjstat`. The GUI is
+   implemented using `shiny`, `shinydashboard`, and `ggplot`. A future version
+   will implement Highcharts.
+Imports: magrittr,
+    httr,
+    rjstat
+License: file LICENCE
+LazyData: TRUE
+ByteCompile: Yes

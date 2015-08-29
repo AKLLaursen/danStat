@@ -1,0 +1,18 @@
+{
+    "contents" : "#' Function importing data from the API of Danmarks Statistik. A wrapper around\n#' httr.\n#'\n#' @param monthFrom A date string in the format of (%Y-%m-%d)\n#' @param monthTo A date string in the format of (%Y-%m-%d)\n#' @return A data frame of the requested data.\n#'\n#' @export\n#'\nimportData <- function(monthFrom, monthTo) {\n\n  monthFrom %<>% as.Date()\n  monthTo %<>% as.Date()\n\n  monthSeries <- seq(monthFrom, monthTo, by = \"1 month\") %>%\n    format(\"%Y-%m\") %>%\n    gsub(\"-\", \"M\", .) %>%\n    paste(collapse = \"%2C\")\n\n  path <- paste0(\"http://api.statbank.dk/v1/data/PRIS6/JSONSTAT?lang=en&valueP\",\n                 \"resentation=Default&timeOrder=Ascending&VAREGR=*&ENHED=*&TID\",\n                 \"=\", monthSeries)\n\n  statData <- path %>%\n    GET() %>%\n    content() %>%\n    fromJSONstat() %>%\n    `[[`(1) %>%\n    transmute(commodityGroup = `commodity group` %>%\n                gsub(\"^\\\\S*\", \"\", .) %>%\n                as.character(),\n              unit = unit %>% as.character(),\n              time = time %>%\n                gsub(\"M\", \"-\", .) %>%\n                paste0(\"-01\") %>%\n                as.Date() %>%\n                format(\"%Y-%m\"),\n              value = value)\n\n  return(statData)\n}\n",
+    "created" : 1440617014929.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "2169364348",
+    "id" : "BA5427BA",
+    "lastKnownWriteTime" : 1440874120,
+    "path" : "~/git/r/danStat/R/importData.R",
+    "project_path" : "R/importData.R",
+    "properties" : {
+        "tempName" : "Untitled1"
+    },
+    "relative_order" : 1,
+    "source_on_save" : false,
+    "type" : "r_source"
+}

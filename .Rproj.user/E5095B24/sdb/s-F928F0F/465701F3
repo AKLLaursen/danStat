@@ -1,0 +1,18 @@
+{
+    "contents" : "#' @importFrom magrittr %>% %<>%\n\n#' @importFrom dplyr mutate\n\n#' @importFrom httr GET content\n\n#' @importFrom rjstat fromJSONstat\nNULL\n",
+    "created" : 1440617203133.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "47792230",
+    "id" : "465701F3",
+    "lastKnownWriteTime" : 1440872503,
+    "path" : "~/git/r/danStat/R/0import.R",
+    "project_path" : "R/0import.R",
+    "properties" : {
+        "tempName" : "Untitled1"
+    },
+    "relative_order" : 2,
+    "source_on_save" : false,
+    "type" : "r_source"
+}
