@@ -39,3 +39,56 @@ importData <- function(monthFrom, monthTo) {
 
   return(statData)
 }
+
+#' A wrapper around httr::GET, providing the base url for Danmarks Statistik and
+#' and sends a GET request based on the given inputs.
+#'
+#' @param call A string with inputs. One of c("subjects", "tables", "tableinfo",
+#' "data") for retrieving subjects, tables, table meta data and data
+#' respectively.
+#' @param subjects A vector of strings providing specific subjects of interest.
+#' @param tables A vector of strings providing specific tables.
+#' @param variables A list containing various variables of interest
+#'
+#' @return A data frame of the desired data.
+#'
+#' @export
+#'
+danStatGET <- function(call, subject = NULL, table = NULL, variables = NULL) {
+
+  path <- paste0("http://api.statbank.dk/v1/",
+                 call,
+                 "?lang=en&format",
+                 if (!is.null(subject)) subject,
+                 if (call == "subjects" | call == "tables") "JSON")
+
+  data <- path %>%
+    GET() %>%
+    content(as = "text")
+
+  return(data)
+}
+
+#' Function importing the various subjects from Danmarks Statistik.
+#'
+#' @return A vector containing the subjects
+#'
+#' @export
+#'
+importSubjects <- function() {
+  danStatGET("subjects") %>%
+    fromJSON()
+}
+
+#' Function importing the various tables from Danmarks statistik.
+#'
+#' @param subject A string with a subject from the subjects list.
+#'
+#' @return A vector of strings containing the table names.
+#'
+#' @export
+#'
+importTables <- function(subject) {
+  danStatGET("tables", subject = subject) %>%
+    fromJSON()
+}

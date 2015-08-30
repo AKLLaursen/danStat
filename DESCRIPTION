@@ -14,7 +14,9 @@ Description: danStat provides a graphical user interface (GUI) to the various
    will implement Highcharts.
 Imports: magrittr,
     httr,
-    rjstat
+    rjstat,
+    jsonlite,
+    dplyr
 License: MIT + file LICENCE
 LazyData: TRUE
 ByteCompile: Yes
